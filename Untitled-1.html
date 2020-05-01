@@ -1,0 +1,44 @@
+<html>
+
+<head>
+    <style>
+        div {
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="padding:100px;background-color: white;">
+        <div id="dv"></div>
+
+    </div>
+
+
+</body>
+<script type="text/javascript">
+    let dv = document.getElementById("dv");
+    dv.onmousedown = (event) => {
+        dv.style.cursor = "move"
+        console.log(dv.style)
+        let offsetx = event.clientX - dv.offsetLeft;
+        let offsety = event.clientY - dv.offsetTop;
+        document.onmousemove = (event) => {
+            let x = event.clientX - offsetx;
+            let y = event.clientY - offsety;
+            dv.style.left = x + "px";
+            dv.style.top = y + "px";
+        }
+        document.onmouseup = () => {
+            dv.style.cursor = "pointer"
+            document.onmousemove = null;
+            document.onmouseup = null;
+        }
+        return false;
+    }
+</script>
+
+</html>
