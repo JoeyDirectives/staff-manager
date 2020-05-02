@@ -372,6 +372,25 @@ export default {
           this.staffName = res.data.staffName;
           this.roleName = res.data.roleName;
         });
+      this.$axios
+        .get("/api/HomePage/staffInfo")
+        .then(res => {
+          this.staffConditionItems[0].value = res.data.filter(item => {
+            return item.workType == "在职";
+          }).length;
+          this.staffConditionItems[1].value = res.data.filter(item => {
+            return item.workType == "实习";
+          }).length;
+          this.staffConditionItems[2].value = res.data.filter(item => {
+            return item.workType == "兼职";
+          }).length;
+          this.staffConditionItems[3].value = res.data.filter(item => {
+            return item.workType == "离职";
+          }).length;
+        })
+        .catch(reason => {
+          console.log(reason);
+        });
     },
     /**
      * @description 路由名转url
