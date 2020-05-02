@@ -376,7 +376,6 @@ export default {
         .get("/api/HomePage/staffInfo")
         .then(res => {
           console.log(res.data);
-          console.log("event_available");
           this.staffConditionItems[0].value = res.data.filter(item => {
             return item.workType == "在职";
           }).length;
