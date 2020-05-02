@@ -272,7 +272,7 @@ export default {
       //待办事项列表数组
       scheduleItems: [],
       //公告列表
-      newsItems:null,
+      newsItems: null,
       showTimePicker: false,
       //顶部面包屑数组
       breadItems: [
