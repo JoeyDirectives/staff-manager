@@ -375,6 +375,7 @@ export default {
       this.$axios
         .get("/api/HomePage/staffInfo")
         .then(res => {
+          console.log(res.data);
           this.staffConditionItems[0].value = res.data.filter(item => {
             return item.workType == "在职";
           }).length;
