@@ -7,6 +7,7 @@ const store = new Vuex.Store({
         //全屏标志
         fullscreenFlag: 0,
         staffNum:0,
+        staffName:"",
         //公告列表
         newsItems: [{
                 type: "hr通知",
@@ -89,6 +90,13 @@ const store = new Vuex.Store({
          */
         changeUserInfo(state,staffNum){
             state.staffNum = staffNum;
+        },
+        /**
+         * @description 获取登录用户员名
+         * @param {item} state 员工名
+         */
+        getStaffName(state,staffName){
+            state.staffName = staffName;
         }
     }
 })
