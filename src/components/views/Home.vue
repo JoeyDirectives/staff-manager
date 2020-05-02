@@ -117,56 +117,56 @@ export default {
       themeMode: "nights_stay",
       nightColor: "#324157",
       barNightColor: "#242F42",
-      items: [
-        {
-          icon: "mdi-home",
-          "icon-alt": "mdi-home",
-          text: "系统首页",
-          children: []
-        },
-
-        {
-          icon: "mdi-application",
-          "icon-alt": "mdi-application",
-          text: "申请门户",
-          children: []
-        },
-        {
-          icon: "mdi-newspaper-plus",
-          "icon-alt": "mdi-newspaper-plus",
-          text: "新闻公告",
-          children: []
-        },
-        {
-          icon: "mdi-file-document-edit",
-          "icon-alt": "mdi-file-document-edit",
-          text: "审批中心",
-          children: []
-        },
-        {
-          icon: "mdi-chevron-up",
-          "icon-alt": "mdi-chevron-down",
-          text: "人事管理",
-          model: false,
-          children: [
-            { icon: "mdi-account-group", text: "员工花名册", children: [] },
-            { icon: "mdi-file-account", text: "员工档案", children: [] },
-            { icon: "mdi-file-alert-outline", text: "合同记录", children: [] }
-          ]
-        },
-        {
-          icon: "mdi-account-key",
-          "icon-alt": "mdi-account-key",
-          text: "添加用户",
-          children: []
-        }
-      ],
+      items: [],
       selectItems: ["注销"],
       selectingItem: "",
       showMineCenterDialog: false
     };
   },
   mounted() {
+    let items = [
+      {
+        icon: "mdi-home",
+        "icon-alt": "mdi-home",
+        text: "系统首页",
+        children: []
+      },
+      {
+        icon: "mdi-application",
+        "icon-alt": "mdi-application",
+        text: "申请门户",
+        children: []
+      },
+      {
+        icon: "mdi-newspaper-plus",
+        "icon-alt": "mdi-newspaper-plus",
+        text: "新闻公告",
+        children: []
+      },
+      {
+        icon: "mdi-file-document-edit",
+        "icon-alt": "mdi-file-document-edit",
+        text: "审批中心",
+        children: []
+      },
+      {
+        icon: "mdi-chevron-up",
+        "icon-alt": "mdi-chevron-down",
+        text: "人事管理",
+        model: false,
+        children: [
+          { icon: "mdi-account-group", text: "员工花名册", children: [] },
+          { icon: "mdi-file-account", text: "员工档案", children: [] },
+          { icon: "mdi-file-alert-outline", text: "合同记录", children: [] }
+        ]
+      },
+      {
+        icon: "mdi-account-key",
+        "icon-alt": "mdi-account-key",
+        text: "添加用户",
+        children: []
+      }
+    ];
     this.$axios
       .get("/api/HomePage/UserInfo", {
         params: {
@@ -176,6 +176,11 @@ export default {
       .then(res => {
         this.selectItems.unshift(res.data.staffName);
         this.selectingItem = res.data.staffName;
+        if (res.data.roleName == "普通用户") {
+          this.items = items.splice(0,2);
+        } else {
+          this.items = items;
+        }
       });
   },
   methods: {

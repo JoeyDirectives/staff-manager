@@ -201,6 +201,7 @@
       </div>
     </div>
     <v-speed-dial
+      v-show="roleName=='管理员'"
       v-model="fab"
       bottom
       right
@@ -371,6 +372,7 @@ export default {
           console.log(res.data);
           this.staffName = res.data.staffName;
           this.roleName = res.data.roleName;
+          this.$store.commit("getStaffName",this.staffName);
         });
       this.$axios
         .get("/api/HomePage/staffInfo")

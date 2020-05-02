@@ -44,7 +44,10 @@
             <td>{{item.doneConditions}}</td>
             <td>
               <v-btn icon>
-                <v-icon color="#0ca192" @click="recallApplicate(index)">{{item.recall}}</v-icon>
+                <v-icon
+                  color="#0ca192"
+                  @click="recallApplicate(index,item.applicateId)"
+                >mdi-call-missed</v-icon>
               </v-btn>
             </td>
           </tr>
@@ -62,7 +65,8 @@ export default {
   data() {
     return {
       deleteScheduleDialog: false,
-      selectedIndex:0,
+      selectedIndex: 0,
+      selectedId: 0,
       page: 1,
       pageCount: 0,
       headers: [
@@ -103,89 +107,51 @@ export default {
           value: "recall"
         }
       ],
-      undoneItems: [
-        {
-          applicateNum: "QJ-2020-2-2",
-          applicateName: "请假申请",
-          applicateDate: "2020-2-2 13:01:01",
-          applicatePerson: "张三",
-          doneConditions: "未完成",
-          recall: "mdi-call-missed"
-        },
-        {
-          applicateNum: "QJ-2020-2-2",
-          applicateName: "请假申请",
-          applicateDate: "2020-2-2 13:01:01",
-          applicatePerson: "张三",
-          doneConditions: "未完成",
-          recall: "mdi-call-missed"
-        },
-        {
-          applicateNum: "QJ-2020-2-2",
-          applicateName: "请假申请",
-          applicateDate: "2020-2-2 13:01:01",
-          applicatePerson: "张三",
-          doneConditions: "未完成",
-          recall: "mdi-call-missed"
-        },
-        {
-          applicateNum: "QJ-2020-2-2",
-          applicateName: "请假申请",
-          applicateDate: "2020-2-2 13:01:01",
-          applicatePerson: "张三",
-          doneConditions: "未完成",
-          recall: "mdi-call-missed"
-        },
-        {
-          applicateNum: "QJ-2020-2-2",
-          applicateName: "请假申请",
-          applicateDate: "2020-2-2 13:01:01",
-          applicatePerson: "张三",
-          doneConditions: "未完成",
-          recall: "mdi-call-missed"
-        },
-        {
-          applicateNum: "QJ-2020-2-2",
-          applicateName: "请假申请",
-          applicateDate: "2020-2-2 13:01:01",
-          applicatePerson: "张三",
-          doneConditions: "未完成",
-          recall: "mdi-call-missed"
-        },
-        {
-          applicateNum: "QJ-2020-2-2",
-          applicateName: "请假申请",
-          applicateDate: "2020-2-2 13:01:01",
-          applicatePerson: "张三",
-          doneConditions: "未完成",
-          recall: "mdi-call-missed"
-        },
-        {
-          applicateNum: "QJ-2020-2-2",
-          applicateName: "请假申请",
-          applicateDate: "2020-2-2 13:01:01",
-          applicatePerson: "张三",
-          doneConditions: "未完成",
-          recall: "mdi-call-missed"
-        }
-      ]
+      undoneItems: []
     };
   },
+  mounted() {
+    this.init();
+  },
   methods: {
+    /**
+     * @description 获取undone表
+     */
+    init() {
+      this.$axios
+        .get("/api/ApplicationPortal/undoneList")
+        .then(res => {
+          this.undoneItems = res.data;
+        })
+        .catch(reason => {
+          console.log(reason);
+        });
+    },
     /**
      * @description 点击撤回
      * @param index 撤回item的index
      */
-    recallApplicate(index){
+    recallApplicate(index, id) {
       this.selectedIndex = index;
+      this.selectedId = id;
       this.deleteScheduleDialog = true;
     },
     /**
      * @description 确认撤回事件
      */
-    deleteApplicate(){
-      this.undoneItems.splice(this.selectedIndex,1);
-      this.deleteScheduleDialog = false;
+    deleteApplicate() {
+      this.$axios
+        .get("/api/ApplicationPortal/deleteUndoneList", {
+          params: {
+            applicateId: this.selectedId
+          }
+        })
+        .then(res => {
+          if (res.data == "200") {
+            this.undoneItems.splice(this.selectedIndex, 1);
+            this.deleteScheduleDialog = false;
+          }
+        });
     }
   }
 };
