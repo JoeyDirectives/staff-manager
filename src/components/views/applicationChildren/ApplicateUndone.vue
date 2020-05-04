@@ -148,8 +148,20 @@ export default {
         })
         .then(res => {
           if (res.data == "200") {
-            this.undoneItems.splice(this.selectedIndex, 1);
-            this.deleteScheduleDialog = false;
+            //删除审批表对应数据
+            console.log(this.undoneItems)
+            this.$axios
+              .get("/api/ApplicationPortal/deleteLeaveList", {
+                params: {
+                  applicateDate: this.undoneItems[this.selectedIndex].applicateDate
+                }
+              })
+              .then(res => {
+                if (res.data == "200") {
+                  this.undoneItems.splice(this.selectedIndex, 1);
+                  this.deleteScheduleDialog = false;
+                }
+              });
           }
         });
     }

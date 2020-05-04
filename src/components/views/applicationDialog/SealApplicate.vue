@@ -103,9 +103,50 @@ export default {
         }
       }
       this.showSuccessDialog = true;
-      console.log(this.leaveInfo);
+      let info = {
+        applicateNum: `GZ-${new Date().toISOString().substr(0, 10)}`,
+        applicateName: "公章申请",
+        applicateDate: this.getNow(),
+        applicatePerson: this.$store.state.staffName,
+        doneConditions:"未完成"
+      };
+      this.addUndoneList(info);
+      console.log(info)
       this.$emit("close");
-    }
+    },
+    /**
+     * @description 获取当前日期
+     */
+    getNow() {
+      let date = new Date();
+      let time = ` ${date
+        .getHours()
+        .toString()
+        .padStart(2, 0)}:${date
+        .getMinutes()
+        .toString()
+        .padStart(2, 0)}:${date
+        .getSeconds()
+        .toString()
+        .padStart(2, 0)}`;
+      return date.toISOString().substr(0, 10) + time;
+    },
+    /**
+     * @description 申请成功，添加至未完成表
+     * @param leaveEntity info
+     */
+    addUndoneList(leaveEntity) {
+      this.$axios
+        .post("/api/ApplicationPortal/leave", leaveEntity)
+        .then(res => {
+          if (res.data == "200") {
+            console.log("OK");
+          }
+        })
+        .catch(reason => {
+          console.log(reason);
+        });
+    },
   },
   watch: {
     /**

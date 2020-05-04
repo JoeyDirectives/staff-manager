@@ -62,15 +62,16 @@
           <tbody>
             <tr v-for="(item,index) in items" :key="item.name">
               <td>{{item.applicateNum}}</td>
-              <td>{{item.applicateName}}</td>
+              <td>{{item.staffName}}</td>
               <td>{{item.staffNum}}</td>
+              <td>{{item.leaveType}}</td>
               <td>{{item.applicateDate}}</td>
               <td>{{item.startDate}}</td>
               <td>{{item.endDate}}</td>
               <td>{{item.applicateReason}}</td>
               <td>
                 <v-btn icon>
-                  <v-icon color="#0ca192" @click="gotoApprove(index)">{{item.details}}</v-icon>
+                  <v-icon color="#0ca192" @click="gotoApprove(index)">mdi-arrow-up-bold-box-outline</v-icon>
                 </v-btn>
               </td>
             </tr>
@@ -124,6 +125,12 @@ export default {
           value: "staffNum"
         },
         {
+          text: "请假类型",
+          align: "center",
+          sortable: true,
+          value: "leaveType"
+        },
+        {
           text: "申请日期",
           align: "center",
           sortable: true,
@@ -145,7 +152,8 @@ export default {
           text: "请假事由",
           align: "center",
           sortable: true,
-          value: "applicateReason"
+          value: "applicateReason",
+          width: 280
         },
         {
           text: "审批",
@@ -154,41 +162,21 @@ export default {
           value: "details"
         }
       ],
-      leaveItems: [
-        {
-          applicateNum: "QJ-2020-02-03",
-          applicateName: "张三",
-          staffNum: "048",
-          applicateDate: "2016-02-05 12:59:12",
-          startDate: "2016-02-05 12:59:12",
-          endDate: "2016-02-05 12:59:12",
-          applicateReason: "啊手机打开拉萨啊大苏打实打实大苏打",
-          details: "mdi-arrow-up-bold-box-outline"
-        },
-        {
-          applicateNum: "QJ-2020-02-03",
-          applicateName: "历史",
-          staffNum: "048",
-          applicateDate: "2016-02-05 12:59:12",
-          startDate: "2016-02-05 12:59:12",
-          endDate: "2016-02-05 12:59:12",
-          applicateReason: "啊手机打开拉萨啊大苏打实打实大苏打",
-          details: "mdi-arrow-up-bold-box-outline"
-        },
-        {
-          applicateNum: "QJ-2020-02-03",
-          applicateName: "王五",
-          staffNum: "048",
-          applicateDate: "2016-02-05 12:59:12",
-          startDate: "2016-02-05 12:59:12",
-          endDate: "2016-02-05 12:59:12",
-          applicateReason: "啊手机打开拉萨啊大苏打实打实大苏打",
-          details: "mdi-arrow-up-bold-box-outline"
-        }
-      ]
+      leaveItems: []
     };
   },
+  mounted() {
+    this.init();
+  },
   methods: {
+    init() {
+      this.$axios
+        .get("/api/ExamineAndApprove/getleaveList")
+        .then(res => {
+          this.leaveItems = res.data;
+          console.log(res.data)
+        });
+    },
     /**
      * @description 展示是否同意申请dialog
      * @param index item的index
@@ -243,10 +231,10 @@ td {
   text-align: center;
   border-right: none;
 }
-.data-table >>> th:nth-child(8) {
+.data-table >>> th:nth-child(9) {
   border: 1px solid #aaa;
 }
-.data-table >>> td:nth-child(8) {
+.data-table >>> td:nth-child(9) {
   border: 1px solid #aaa;
 }
 .pagination-style {

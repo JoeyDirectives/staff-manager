@@ -180,9 +180,50 @@ export default {
           return;
         }
       }
-      console.log(this.leaveInfo);
       this.showSuccessDialog = true;
+      let info = {
+        applicateNum: `EW-${new Date().toISOString().substr(0, 10)}`,
+        applicateName: "加班申请",
+        applicateDate: this.getNow(),
+        applicatePerson: this.$store.state.staffName,
+        doneConditions:"未完成"
+      };
+      this.addUndoneList(info);
+      console.log(info)
       this.$emit("close");
+    },
+    /**
+     * @description 申请成功，添加至未完成表
+     * @param leaveEntity info
+     */
+    addUndoneList(leaveEntity) {
+      this.$axios
+        .post("/api/ApplicationPortal/leave", leaveEntity)
+        .then(res => {
+          if (res.data == "200") {
+            console.log("OK");
+          }
+        })
+        .catch(reason => {
+          console.log(reason);
+        });
+    },
+    /**
+     * @description 获取当前日期
+     */
+    getNow() {
+      let date = new Date();
+      let time = ` ${date
+        .getHours()
+        .toString()
+        .padStart(2, 0)}:${date
+        .getMinutes()
+        .toString()
+        .padStart(2, 0)}:${date
+        .getSeconds()
+        .toString()
+        .padStart(2, 0)}`;
+      return date.toISOString().substr(0, 10) + time;
     },
     /**
      * @description 限制选择今日之前的时间
