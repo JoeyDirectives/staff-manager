@@ -121,7 +121,10 @@ export default {
       this.$axios
         .get("/api/ApplicationPortal/undoneList")
         .then(res => {
-          this.undoneItems = res.data;
+          let name = this.$store.state.staffName;
+          this.undoneItems = res.data.filter(item => {
+            return name == item.applicatePerson;
+          });
         })
         .catch(reason => {
           console.log(reason);
@@ -149,11 +152,12 @@ export default {
         .then(res => {
           if (res.data == "200") {
             //删除审批表对应数据
-            console.log(this.undoneItems)
+            console.log(this.undoneItems);
             this.$axios
               .get("/api/ApplicationPortal/deleteLeaveList", {
                 params: {
-                  applicateDate: this.undoneItems[this.selectedIndex].applicateDate
+                  applicateDate: this.undoneItems[this.selectedIndex]
+                    .applicateDate
                 }
               })
               .then(res => {

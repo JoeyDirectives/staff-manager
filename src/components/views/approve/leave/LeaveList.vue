@@ -153,7 +153,7 @@ export default {
           align: "center",
           sortable: true,
           value: "applicateReason",
-          width: 280
+          width: "350px"
         },
         {
           text: "审批",
@@ -170,12 +170,12 @@ export default {
   },
   methods: {
     init() {
-      this.$axios
-        .get("/api/ExamineAndApprove/getleaveList")
-        .then(res => {
-          this.leaveItems = res.data;
-          console.log(res.data)
+      this.$axios.get("/api/ExamineAndApprove/getleaveList").then(res => {
+        this.leaveItems = res.data.filter(item => {
+          return item.applicateNum.split("-")[0] == "QJ";
         });
+        console.log(res.data);
+      });
     },
     /**
      * @description 展示是否同意申请dialog
@@ -186,12 +186,117 @@ export default {
       this.makesureDialog = true;
     },
     /**
-     * @description 同意审批事件
+     * @description 审批事件
      */
     accessApplicate() {
-      this.leaveItems.splice(this.selectedIndex, 1);
-      //todo
-      this.makesureDialog = false;
+      // 同意审批
+      if (this.radioGroup == "1") {
+        // 删除选中审批
+        this.$axios
+          .get("/api/ExamineAndApprove/deleteLeaveApprove", {
+            params: {
+              approveId: this.leaveItems[this.selectedIndex].approveId
+            }
+          })
+          .then(res => {
+            if (res.data == "200") {
+              let info = {
+                applicateNum: this.leaveItems[this.selectedIndex].applicateNum,
+                applicateName: this.leaveItems[this.selectedIndex].leaveType,
+                applicateDate: this.leaveItems[this.selectedIndex]
+                  .applicateDate,
+                applicatePerson: this.leaveItems[this.selectedIndex].staffName,
+                doneConditions: "已同意",
+                applicateReason: this.leaveItems[this.selectedIndex]
+                  .applicateReason
+              };
+              this.addToDone(info);
+              this.deleteUnDone(
+                this.leaveItems[this.selectedIndex].applicateDate
+              );
+              let done = this.leaveItems[this.selectedIndex];
+              done.applicateType = "已同意";
+              this.addToApproveDone(done);
+              this.leaveItems.splice(this.selectedIndex, 1);
+              //todo
+              this.makesureDialog = false;
+            }
+          });
+      } else {
+        this.$axios
+          .get("/api/ExamineAndApprove/deleteLeaveApprove", {
+            params: {
+              approveId: this.leaveItems[this.selectedIndex].approveId
+            }
+          })
+          .then(res => {
+            if (res.data == "200") {
+              let info = {
+                applicateNum: this.leaveItems[this.selectedIndex].applicateNum,
+                applicateName: this.leaveItems[this.selectedIndex].leaveType,
+                applicateDate: this.leaveItems[this.selectedIndex]
+                  .applicateDate,
+                applicatePerson: this.leaveItems[this.selectedIndex].staffName,
+                doneConditions: "已驳回",
+                applicateReason: this.leaveItems[this.selectedIndex]
+                  .applicateReason
+              };
+              this.addToDone(info);
+              this.deleteUnDone(
+                this.leaveItems[this.selectedIndex].applicateDate
+              );
+              let done = this.leaveItems[this.selectedIndex];
+              done.applicateType = "已驳回";
+              this.addToApproveDone(done);
+              this.leaveItems.splice(this.selectedIndex, 1);
+              //todo
+              this.makesureDialog = false;
+            }
+          });
+      }
+    },
+    /**
+     * @description 审批完成后添加至完成审批表
+     * @param ApplicationEntity
+     */
+    addToApproveDone(ApplicationEntity) {
+      this.$axios
+        .post("/api/ExamineAndApprove/addApproveDone", ApplicationEntity)
+        .then(res => {
+          if (res.data == "200") {
+            console.log("OK");
+          }
+        });
+    },
+    /**
+     * @description 删除相应的未完成信息
+     * @param applicateDate
+     */
+    deleteUnDone(applicateDate) {
+      this.$axios
+        .get("/api/ExamineAndApprove/deleteUndone", {
+          params: {
+            applicateDate
+          }
+        })
+        .then(res => {
+          if (res.data == "200") {
+            console.log("删除成功");
+          }
+        });
+    },
+    /**
+     * @description 同意或驳回请假审批后，添加到已完成申请表中
+     * @param ApplicationEntity info
+     */
+    addToDone(ApplicationEntity) {
+      this.$axios
+        .post("/api/ExamineAndApprove/addDone", ApplicationEntity)
+        .then(res => {
+          if (res.data == "200") {
+            console.log("OK");
+          }
+        });
     }
   }
 };
@@ -230,6 +335,11 @@ td {
   border: 1px solid #aaa;
   text-align: center;
   border-right: none;
+}
+.data-table >>> td:nth-child(8) {
+  text-align: justify;
+  text-justify: newspaper;
+  word-break: break-all;
 }
 .data-table >>> th:nth-child(9) {
   border: 1px solid #aaa;

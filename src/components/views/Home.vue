@@ -72,7 +72,8 @@
         <template v-slot:activator="{ on }">
           <v-btn v-on="on" icon large @click="showMineCenter">
             <v-avatar size="32px" item>
-              <v-img src="@/assets/avatar.jpg" />
+              <v-img v-if="staffInfo =='蒋轩海'" src="@/assets/avatar.jpg" />
+              <v-img v-else src="@/assets/avatar2.jpeg" />
             </v-avatar>
           </v-btn>
         </template>
@@ -122,6 +123,11 @@ export default {
       selectingItem: "",
       showMineCenterDialog: false
     };
+  },
+  computed: {
+    staffInfo() {
+      return this.$store.state.staffName;
+    }
   },
   mounted() {
     let items = [
@@ -177,7 +183,7 @@ export default {
         this.selectItems.unshift(res.data.staffName);
         this.selectingItem = res.data.staffName;
         if (res.data.roleName == "普通用户") {
-          this.items = items.splice(0,2);
+          this.items = items.splice(0, 2);
         } else {
           this.items = items;
         }
@@ -300,6 +306,7 @@ export default {
     selectChanged(val) {
       if (val === "注销") {
         this.$router.replace({ path: "/" });
+        this.$store.commit("reset");
       }
     }
   }

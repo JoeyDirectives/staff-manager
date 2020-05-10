@@ -77,12 +77,13 @@ export default {
     return {
       showErrorDialog: false,
       showSuccessDialog: false,
-      FileTypesItems: ["合同", "证明","入离职资料","政府及项目申报","其它"],
+      FileTypesItems: ["合同", "证明", "入离职资料", "政府及项目申报", "其它"],
       //请假申请modeIn
       leaveInfo: {
         type: "",
         leaveReason: ""
-      }
+      },
+      counter: 0
     };
   },
   methods: {
@@ -104,15 +105,41 @@ export default {
       }
       this.showSuccessDialog = true;
       let info = {
-        applicateNum: `GZ-${new Date().toISOString().substr(0, 10)}`,
+        applicateNum: `GZ-${new Date().toISOString().substr(0, 10)}-${++this
+          .counter}`,
         applicateName: "公章申请",
         applicateDate: this.getNow(),
         applicatePerson: this.$store.state.staffName,
-        doneConditions:"未完成"
+        doneConditions: "未完成"
       };
       this.addUndoneList(info);
-      console.log(info)
+      this.addApproveList({
+        applicateDate: this.getNow(),
+        staffName: this.$store.state.staffName,
+        applicateNum: info.applicateNum,
+        staffNum: this.$store.state.staffNum,
+        leaveType: this.leaveInfo.type,
+        startDate: "",
+        endDate: "",
+        applicateReason: this.leaveInfo.leaveReason
+      });
+      console.log(info);
       this.$emit("close");
+    },
+    /**
+     * @description 添加到审批列表
+     */
+    addApproveList(leaveEntity) {
+      this.$axios
+        .post("/api/ExamineAndApprove/leaveList", leaveEntity)
+        .then(res => {
+          if (res.data == "200") {
+            console.log("leaveList OK");
+          }
+        })
+        .catch(reason => {
+          console.log(reason);
+        });
     },
     /**
      * @description 获取当前日期
@@ -146,7 +173,7 @@ export default {
         .catch(reason => {
           console.log(reason);
         });
-    },
+    }
   },
   watch: {
     /**

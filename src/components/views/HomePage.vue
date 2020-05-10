@@ -116,7 +116,8 @@
       <v-card max-width="344" style="margin:10px 0 0 10px">
         <v-card-text>
           <v-avatar size="150px">
-            <v-img src="@/assets/avatar.jpg" />
+            <v-img v-if="staffInfo =='蒋轩海'" src="@/assets/avatar.jpg" />
+            <v-img v-else src="@/assets/avatar2.jpeg" />
           </v-avatar>
           <div class="card-main-content">
             <h2 style="margin: 0 0 8px 0">欢迎，{{staffName}}</h2>
@@ -332,6 +333,9 @@ export default {
      */
     fullScreen() {
       return this.$store.state.fullscreenFlag;
+    },
+    staffInfo() {
+      return this.$store.state.staffName;
     }
   },
   /**
@@ -372,7 +376,7 @@ export default {
           console.log(res.data);
           this.staffName = res.data.staffName;
           this.roleName = res.data.roleName;
-          this.$store.commit("getStaffName",this.staffName);
+          this.$store.commit("getStaffName", this.staffName);
         });
       this.$axios
         .get("/api/HomePage/staffInfo")

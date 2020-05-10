@@ -30,12 +30,11 @@
           <tbody>
             <tr v-for="(item) in items" :key="item.name">
               <td>{{item.applicateNum}}</td>
-              <td>{{item.applicateName}}</td>
+              <td>{{item.staffName}}</td>
               <td>{{item.staffNum}}</td>
-              <td>{{item.applicateDate}}</td>
-              <td>{{item.startDate}}</td>
-              <td>{{item.endDate}}</td>
               <td>{{item.applicateReason}}</td>
+              <td>{{item.startDate}}</td>
+              <td>{{item.leaveType}}</td>
               <td>{{item.applicateType}}</td>
             </tr>
           </tbody>
@@ -75,79 +74,49 @@ export default {
           value: "staffNum"
         },
         {
-          text: "申请日期",
-          align: "center",
-          sortable: true,
-          value: "applicateDate"
-        },
-        {
-          text: "开始时间",
-          align: "center",
-          sortable: true,
-          value: "startDate"
-        },
-        {
-          text: "结束时间",
-          align: "center",
-          sortable: true,
-          value: "endDate"
-        },
-        {
           text: "离职事由",
           align: "center",
           sortable: true,
           value: "applicateReason"
         },
         {
-          text: "审批类型",
+          text: "期望离职日",
+          align: "center",
+          sortable: true,
+          value: "startDate",
+          width: "350px"
+        },
+        {
+          text: "备注",
+          align: "center",
+          sortable: true,
+          value: "leaveType"
+        },
+        {
+          text: "审批结果",
           align: "center",
           sortable: true,
           value: "applicateType"
         }
       ],
-      leaveItems: [
-        {
-          applicateNum: "QJ-2020-02-03",
-          applicateName: "张三",
-          staffNum: "048",
-          applicateDate: "2016-02-05 12:59:12",
-          startDate: "2016-02-05 12:59:12",
-          endDate: "2016-02-05 12:59:12",
-          applicateReason: "啊手机打开拉萨啊大苏打实打实大苏打",
-          applicateType:"已同意"
-        },
-        {
-          applicateNum: "QJ-2020-02-03",
-          applicateName: "历史",
-          staffNum: "048",
-          applicateDate: "2016-02-05 12:59:12",
-          startDate: "2016-02-05 12:59:12",
-          endDate: "2016-02-05 12:59:12",
-          applicateReason: "啊手机打开拉萨啊大苏打实打实大苏打",
-          applicateType:"已驳回"
-        },
-        {
-          applicateNum: "QJ-2020-02-03",
-          applicateName: "王五",
-          staffNum: "048",
-          applicateDate: "2016-02-05 12:59:12",
-          startDate: "2016-02-05 12:59:12",
-          endDate: "2016-02-05 12:59:12",
-          applicateReason: "啊手机打开拉萨啊大苏打实打实大苏打",
-          applicateType:"已驳回"
-        },
-        {
-          applicateNum: "QJ-2020-02-03",
-          applicateName: "王五",
-          staffNum: "048",
-          applicateDate: "2016-02-05 12:59:12",
-          startDate: "2016-02-05 12:59:12",
-          endDate: "2016-02-05 12:59:12",
-          applicateReason: "啊手机打开拉萨啊大苏打实打实大苏打",
-          applicateType:"已驳回"
-        }
-      ]
+      leaveItems: []
     };
+  },
+  mounted() {
+    this.init();
+  },
+  methods: {
+    /**
+     * @description 获取完成审批表
+     */
+    init() {
+      this.$axios.get("/api/ExamineAndApprove/getApproveDone").then(res => {
+        this.leaveItems = res.data.filter(item => {
+          return item.applicateNum.split("-")[0] == "LZ";
+        });
+        console.log(res.data);
+      });
+    }
   }
 };
 </script>

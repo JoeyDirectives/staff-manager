@@ -6,8 +6,8 @@ const store = new Vuex.Store({
     state: {
         //全屏标志
         fullscreenFlag: 0,
-        staffNum:0,
-        staffName:"",
+        staffNum: 0,
+        staffName: "",
         //公告列表
         newsItems: [],
         //面包屑items
@@ -16,9 +16,20 @@ const store = new Vuex.Store({
             disabled: false,
             href: "HomePage"
         }],
-        breadText:"系统首页"
+        breadText: "系统首页"
     },
     mutations: {
+        /**
+         * @description 切换用户后，复原面包屑
+         * @param {breadItems} state
+         */
+        reset(state) {
+            state.breadItems = [{
+                text: "系统首页",
+                disabled: false,
+                href: "HomePage"
+            }]
+        },
         /**
          * @description 点击全屏按钮触发，拉伸主页面盒子大小
          * @param {fullscreenFlag} state 全屏状态
@@ -53,7 +64,9 @@ const store = new Vuex.Store({
                 return el.text == item.text;
             });
             state.breadItems.splice(index, 1);
-            this.$router.push({ name: state.breadItems[index].text });
+            this.$router.push({
+                name: state.breadItems[index].text
+            });
         },
         /**
          * @description 面包屑
@@ -73,14 +86,14 @@ const store = new Vuex.Store({
          * @description 获取登录用户员工号
          * @param {item} state 员工号
          */
-        changeUserInfo(state,staffNum){
+        changeUserInfo(state, staffNum) {
             state.staffNum = staffNum;
         },
         /**
          * @description 获取登录用户员名
          * @param {item} state 员工名
          */
-        getStaffName(state,staffName){
+        getStaffName(state, staffName) {
             state.staffName = staffName;
         }
     }

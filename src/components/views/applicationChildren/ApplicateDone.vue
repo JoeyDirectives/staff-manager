@@ -14,17 +14,17 @@
             <span>关闭</span>
           </v-tooltip>
         </v-card-title>
-        <v-container>
-          申请类型: 请假申请 
+        <v-container v-if="item!=null">
+          申请类型: {{item.applicateName}}
           <br />
           <v-divider />
-          申请日: 2020-2-2 12:12:12
+          申请日: {{item.applicateDate}}
           <br />
           <v-divider />
-          申请人: 张三
+          申请人: {{item.applicatePerson}}
           <br />
           <v-divider />
-          申请事由: 山东科技法律圣诞节分厘卡圣诞节付款了
+          申请事由: {{item.applicateReason}}
         </v-container>
         <v-card-actions>
           <v-spacer />
@@ -44,7 +44,7 @@
     >
       <template v-slot:body="{ items }">
         <tbody>
-          <tr v-for="(item,index) in items" :key="item.name">
+          <tr v-for="(item,index) in items" :key="item.name" @click="getNowItem(item)">
             <td>{{item.applicateNum}}</td>
             <td>{{item.applicateName}}</td>
             <td>{{item.applicateDate}}</td>
@@ -52,7 +52,7 @@
             <td>{{item.doneConditions}}</td>
             <td>
               <v-btn icon>
-                <v-icon color="#0ca192" @click="showDetails(index)">{{item.details}}</v-icon>
+                <v-icon color="#0ca192" @click="showDetails(index)">mdi-clipboard-list-outline</v-icon>
               </v-btn>
             </td>
           </tr>
@@ -111,176 +111,37 @@ export default {
           value: "details"
         }
       ],
-      doneItems: [
-        {
-          applicateNum: "QJ-2020-2-2",
-          applicateName: "请假申请",
-          applicateDate: "2020-2-2 13:01:01",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "QJ-2020-2-3",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        },
-        {
-          applicateNum: "666",
-          applicateName: "离职申请",
-          applicateDate: "2020-2-2 13:01:03",
-          applicatePerson: "张三",
-          doneConditions: "已完成",
-          details: "mdi-clipboard-list-outline"
-        }
-      ]
+      item: null,
+      doneItems: []
     };
   },
+  mounted() {
+    this.init();
+  },
   methods: {
+    /**
+     * @description 获取done表
+     */
+    init() {
+      this.$axios.get("/api/ApplicationPortal/doneList").then(res => {
+        let name = this.$store.state.staffName;
+        this.doneItems = res.data.filter(item => {
+          return name == item.applicatePerson;
+        });
+      });
+    },
+    /**
+     * @description 获取当前选择行item
+     */
+    getNowItem(item) {
+      this.item = item;
+      console.log("item", this.item);
+    },
     /**
      * @deprecated 展示当前已完成的选中的申请详细
      * @param index 当前所选择行的index
      */
-    showDetails(index){
+    showDetails(index) {
       this.showDetailNewsIndex = index;
       this.showDetailNewsDialog = true;
     }

@@ -160,7 +160,8 @@ export default {
         endDate: "",
         endTime: "",
         leaveReason: ""
-      }
+      },
+      counter: 0
     };
   },
   methods: {
@@ -182,15 +183,41 @@ export default {
       }
       this.showSuccessDialog = true;
       let info = {
-        applicateNum: `EW-${new Date().toISOString().substr(0, 10)}`,
+        applicateNum: `EW-${new Date().toISOString().substr(0, 10)}-${++this
+          .counter}`,
         applicateName: "加班申请",
         applicateDate: this.getNow(),
         applicatePerson: this.$store.state.staffName,
-        doneConditions:"未完成"
+        doneConditions: "未完成"
       };
       this.addUndoneList(info);
-      console.log(info)
+      this.addApproveList({
+        applicateDate: this.getNow(),
+        staffName: this.$store.state.staffName,
+        applicateNum: info.applicateNum,
+        staffNum: this.$store.state.staffNum,
+        leaveType: "",
+        startDate: `${this.leaveInfo.startDate} ${this.leaveInfo.startTime}`,
+        endDate: `${this.leaveInfo.endDate} ${this.leaveInfo.endTime}`,
+        applicateReason: this.leaveInfo.leaveReason
+      });
+      console.log(info);
       this.$emit("close");
+    },
+    /**
+     * @description 添加到审批列表
+     */
+    addApproveList(leaveEntity) {
+      this.$axios
+        .post("/api/ExamineAndApprove/leaveList", leaveEntity)
+        .then(res => {
+          if (res.data == "200") {
+            console.log("leaveList OK");
+          }
+        })
+        .catch(reason => {
+          console.log(reason);
+        });
     },
     /**
      * @description 申请成功，添加至未完成表
