@@ -131,11 +131,7 @@
         </template>
       </v-data-table>
       <div style="position: relative;background:#fff;height:80px">
-        <v-pagination
-          v-model="page"
-          class="my-4 page-count-style"
-          :length="pageCount"
-        ></v-pagination>
+        <v-pagination v-model="page" class="my-4 page-count-style" :length="pageCount"></v-pagination>
         <span class="pagination-style">当前第{{page}}页，共{{pageCount}}页</span>
       </div>
     </v-card>
@@ -205,35 +201,19 @@ export default {
           width: 200
         }
       ],
-      roleItems: [
-        {
-          staffNum: "001",
-          staffName: "张三",
-          roleName: "管理员",
-          permisMark: "admin",
-          password: "123456",
-          createdTime: "2020-02-03 12:32:11"
-        },
-        {
-          staffNum: "001",
-          staffName: "历史",
-          roleName: "管理员",
-          permisMark: "common",
-          password: "123456",
-          createdTime: "2020-02-03 12:32:11"
-        },
-        {
-          staffNum: "001",
-          staffName: "张三",
-          roleName: "管理员",
-          permisMark: "admin",
-          password: "123456",
-          createdTime: "2020-02-03 12:32:11"
-        }
-      ]
+      roleItems: []
     };
   },
+  mounted() {
+    this.init();
+  },
   methods: {
+    init() {
+      this.$axios.get("/api/Permissions/List").then(res => {
+        this.roleItems = res.data;
+        console.log(res.data);
+      });
+    },
     /**
      * @description 获取选取行索引
      */
@@ -290,13 +270,18 @@ export default {
      * @description 保存修改
      */
     saveRole(index) {
-      console.log(index);
+      console.log(this.roleItems[index]);
       this.showSuccessDialog = true;
     },
     /**
      * @description 刷新表格数据
      */
-    refresh() {}
+    refresh() {
+      this.$axios.get("/api/Permissions/List").then(res => {
+        this.roleItems = res.data;
+        console.log(res.data);
+      });
+    }
   },
   watch: {
     /**
@@ -396,7 +381,7 @@ td {
 .page-count-style {
   width: 280px;
   position: absolute;
-  right: 150px;
+  right: 200px;
 }
 .v-input >>> .v-input__control {
   height: 48px;

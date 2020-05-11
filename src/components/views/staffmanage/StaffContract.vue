@@ -234,20 +234,52 @@ export default {
       ],
       contractItems: [
         {
-          staffNum: "001",
-          staffName: "张三",
-          IDNum: "51062319751584",
+          staffNum: "101",
+          staffName: "蒋轩海",
+          IDNum: "51062318521478",
           contractType: "劳动合同",
-          startDate: "2020-12-14",
-          endDate: "2021-02-03"
+          startDate: "2000-01-14",
+          endDate: "2021-12-09"
         },
         {
-          staffNum: "001",
-          staffName: "张三",
-          IDNum: "51062319751584",
+          staffNum: "102",
+          staffName: "周存富",
+          IDNum: "51062315213648",
           contractType: "劳动合同",
-          startDate: "2020-12-14",
-          endDate: "2021-02-03"
+          startDate: "2008-10-16",
+          endDate: "2021-02-18"
+        },
+        {
+          staffNum: "103",
+          staffName: "林晓霖",
+          IDNum: "51062315874569",
+          contractType: "劳务合同",
+          startDate: "2002-02-19",
+          endDate: "2021-02-25"
+        },
+        {
+          staffNum: "104",
+          staffName: "侯弘彬",
+          IDNum: "51062318954569",
+          contractType: "劳动合同",
+          startDate: "2003-12-01",
+          endDate: "2031-02-21"
+        },
+        {
+          staffNum: "105",
+          staffName: "赵丽伟",
+          IDNum: "51062318954560",
+          contractType: "三方协议",
+          startDate: "2009-12-08",
+          endDate: "2029-02-12"
+        },
+        {
+          staffNum: "106",
+          staffName: "张三",
+          IDNum: "510623198715211245",
+          contractType: "三方协议",
+          startDate: "2019-12-08",
+          endDate: "2029-02-12"
         }
       ],
       leaveInfo: {
@@ -431,7 +463,7 @@ td {
 .page-count-style {
   width: 280px;
   position: absolute;
-  right: 150px;
+  right: 200px;
 }
 .v-input >>> .v-input__control {
   height: 48px;

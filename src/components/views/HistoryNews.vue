@@ -32,7 +32,7 @@
       :headers="headers"
       :items="historyNewsItems"
       hide-default-footer
-      :items-per-page="7"
+      :items-per-page="5"
     >
       <template v-slot:body="{ items }">
         <tbody>
@@ -144,7 +144,7 @@ export default {
 <style scoped>
 .data-table {
   width: 100%;
-  height: 310px;
+  height: 290px;
 }
 .data-table >>> th {
   background: linear-gradient(to bottom, #0ca192, #aec9c6);

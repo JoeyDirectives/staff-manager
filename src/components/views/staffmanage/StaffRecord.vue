@@ -316,46 +316,88 @@ export default {
       ],
       recordItems: [
         {
-          staffNum: "001",
-          staffName: "张三",
+          staffNum: "101",
+          staffName: "蒋轩海",
           position: "董事长",
-          department: "开发部",
-          IDNum: "51062319751858",
+          department: "人事部",
+          IDNum: "51062318521478",
           education: "研究生",
-          phoneNum: "123456",
+          phoneNum: "12345678902",
           address: "四川德阳",
           nationality: "中国",
-          workEmail: "123@136.com",
+          workEmail: "123456@136.com",
           politicsStatus: "党员",
           maritalStatus: "已婚"
         },
         {
-          staffNum: "001",
-          staffName: "张三",
-          position: "董事长",
+          staffNum: "102",
+          staffName: "周存富",
+          position: "程序员",
           department: "开发部",
-          IDNum: "51062319751858",
+          IDNum: "51062315213648",
           education: "研究生",
-          phoneNum: "123456",
-          address: "四川德阳",
+          phoneNum: "13625214568",
+          address: "四川成都",
           nationality: "中国",
-          workEmail: "123@136.com",
+          workEmail: "136252@136.com",
+          politicsStatus: "团员",
+          maritalStatus: "未婚"
+        },
+        {
+          staffNum: "103",
+          staffName: "林晓霖",
+          position: "项目经理",
+          department: "开发部",
+          IDNum: "51062315874569",
+          education: "本科",
+          phoneNum: "17785261547",
+          address: "四川南充",
+          nationality: "中国",
+          workEmail: "177852@136.com",
           politicsStatus: "党员",
           maritalStatus: "已婚"
         },
         {
-          staffNum: "001",
-          staffName: "张三",
-          position: "董事长",
-          department: "开发部",
-          IDNum: "51062319751858",
-          education: "研究生",
-          phoneNum: "123456",
-          address: "四川德阳",
+          staffNum: "104",
+          staffName: "侯弘彬",
+          position: "程序员",
+          department: "设计部",
+          IDNum: "51062318954569",
+          education: "本科",
+          phoneNum: "14525896324",
+          address: "四川绵阳",
           nationality: "中国",
-          workEmail: "123@136.com",
+          workEmail: "145258@136.com",
           politicsStatus: "党员",
           maritalStatus: "已婚"
+        },
+        {
+          staffNum: "105",
+          staffName: "赵丽伟",
+          position: "项目组长",
+          department: "开发部",
+          IDNum: "51062318954560",
+          education: "本科",
+          phoneNum: "14527896324",
+          address: "北京朝阳",
+          nationality: "中国",
+          workEmail: "145278@136.com",
+          politicsStatus: "党员",
+          maritalStatus: "未婚"
+        },
+        {
+          staffNum: "106",
+          staffName: "张三",
+          position: "项目组长",
+          department: "开发部",
+          IDNum: "510623198715211245",
+          education: "本科",
+          phoneNum: "1234567890",
+          address: "四川南充",
+          nationality: "中国",
+          workEmail: "123465@136.com",
+          politicsStatus: "党员",
+          maritalStatus: "未婚"
         }
       ]
     };
@@ -416,7 +458,94 @@ export default {
     /**
      * @description 刷新表格数据
      */
-    refresh() {}
+    refresh() {
+      this.recordItems = [
+        {
+          staffNum: "101",
+          staffName: "蒋轩海",
+          position: "董事长",
+          department: "人事部",
+          IDNum: "51062318521478",
+          education: "研究生",
+          phoneNum: "12345678902",
+          address: "四川德阳",
+          nationality: "中国",
+          workEmail: "123456@136.com",
+          politicsStatus: "党员",
+          maritalStatus: "已婚"
+        },
+        {
+          staffNum: "102",
+          staffName: "周存富",
+          position: "程序员",
+          department: "开发部",
+          IDNum: "51062315213648",
+          education: "研究生",
+          phoneNum: "13625214568",
+          address: "四川成都",
+          nationality: "中国",
+          workEmail: "136252@136.com",
+          politicsStatus: "团员",
+          maritalStatus: "未婚"
+        },
+        {
+          staffNum: "103",
+          staffName: "林晓霖",
+          position: "项目经理",
+          department: "开发部",
+          IDNum: "51062315874569",
+          education: "本科",
+          phoneNum: "17785261547",
+          address: "四川南充",
+          nationality: "中国",
+          workEmail: "177852@136.com",
+          politicsStatus: "党员",
+          maritalStatus: "已婚"
+        },
+        {
+          staffNum: "104",
+          staffName: "侯弘彬",
+          position: "程序员",
+          department: "设计部",
+          IDNum: "51062318954569",
+          education: "本科",
+          phoneNum: "14525896324",
+          address: "四川绵阳",
+          nationality: "中国",
+          workEmail: "145258@136.com",
+          politicsStatus: "党员",
+          maritalStatus: "已婚"
+        },
+        {
+          staffNum: "105",
+          staffName: "赵丽伟",
+          position: "项目组长",
+          department: "开发部",
+          IDNum: "51062318954560",
+          education: "本科",
+          phoneNum: "14527896324",
+          address: "北京朝阳",
+          nationality: "中国",
+          workEmail: "145278@136.com",
+          politicsStatus: "党员",
+          maritalStatus: "未婚"
+        },
+        {
+          staffNum: "106",
+          staffName: "张三",
+          position: "项目组长",
+          department: "开发部",
+          IDNum: "510623198715211245",
+          education: "本科",
+          phoneNum: "1234567890",
+          address: "四川南充",
+          nationality: "中国",
+          workEmail: "123465@136.com",
+          politicsStatus: "党员",
+          maritalStatus: "未婚"
+        }
+      ]
+    }
   },
   watch: {
     /**
@@ -516,7 +645,7 @@ td {
 .page-count-style {
   width: 280px;
   position: absolute;
-  right: 150px;
+  right: 200px;
 }
 .v-input >>> .v-input__control {
   height: 48px;
