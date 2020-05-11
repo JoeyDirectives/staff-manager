@@ -197,7 +197,7 @@
           @click="showDetailNews(index)"
           v-for="(item, index) in newsItems"
           :key="index"
-          :title="item.text"
+          :title="item.newsContent"
         >{{index+1}}、{{item.newsContent}}</div>
       </div>
     </div>
@@ -359,9 +359,11 @@ export default {
       this.$axios
         .get("/api/HomePage/newsInfo")
         .then(res => {
-          this.newsItems = res.data;
-          console.log("newsItems");
-          console.log(this.newsItems);
+          this.newsItems = res.data.sort((e1,e2)=>{
+            let first = e1.newsTime;
+            let next = e2.newsTime;
+            return next.localeCompare(first);
+          });
         })
         .catch(reason => {
           console.log(reason);

@@ -152,7 +152,7 @@
         <v-card-actions>
           <v-spacer />
           <v-btn @click="close">取消</v-btn>
-          <v-btn color="primary" @click="addStaff(1)">{{btnInfo}}</v-btn>
+          <v-btn color="primary" @click="addStaff()">{{btnInfo}}</v-btn>
         </v-card-actions>
       </v-card>
     </v-dialog>
@@ -334,47 +334,23 @@ export default {
         phoneNum: "",
         workType: ""
       },
-      staffItems: [
-        {
-          staffNum: "001",
-          staffName: "张三",
-          staffPart: "开发部",
-          entryDate: "2020-12-01 12:08:12",
-          cardType: "居民身份证",
-          cardNum: "51062319851318",
-          phoneNum: "1234567890",
-          workType: "在职"
-        },
-        {
-          staffNum: "002",
-          staffName: "历史",
-          staffPart: "开发部",
-          entryDate: "2020-12-01 12:08:12",
-          cardType: "居民身份证",
-          cardNum: "51062319851318",
-          phoneNum: "1234567890",
-          workType: "在职"
-        },
-        {
-          staffNum: "002",
-          staffName: "历史",
-          staffPart: "开发部",
-          entryDate: "2020-12-01 12:08:12",
-          cardType: "居民身份证",
-          cardNum: "51062319851318",
-          phoneNum: "1234567890",
-          workType: "实习"
-        }
-      ]
+      staffItems: []
     };
   },
   created() {
     this.judgeType();
+    this.init();
   },
   updated() {
     this.judgeType();
   },
   methods: {
+    init() {
+      this.$axios.get("/api/HomePage/staffInfo").then(res => {
+        console.log(res.data);
+        this.staffItems = res.data;
+      });
+    },
     /**
      * @description 关闭对话框
      */
@@ -461,7 +437,7 @@ export default {
         }
       }
       if (this.title == "新增员工") {
-        this.staffItems.push({
+        let info = {
           staffNum: this.addStaffInmode.staffNum,
           staffName: this.addStaffInmode.staffName,
           staffPart: this.addStaffInmode.staffPart,
@@ -470,8 +446,13 @@ export default {
           cardNum: this.addStaffInmode.cardNum,
           phoneNum: this.addStaffInmode.phoneNum,
           workType: this.addStaffInmode.workType
+        };
+        this.$axios.post("/api/StaffRoster/addstaff", info).then(res => {
+          if (res.data == "200") {
+            this.staffItems.push(info);
+            this.showSuccessDialog = true;
+          }
         });
-        this.showSuccessDialog = true;
       } else {
         for (let el in this.addStaffInmode) {
           this.staffItems[this.nowIndex][el] = this.addStaffInmode[el];
@@ -621,7 +602,7 @@ td {
 .page-count-style {
   width: 280px;
   position: absolute;
-  right: 150px;
+  right: 200px;
 }
 .v-radio {
   margin-left: 10px;

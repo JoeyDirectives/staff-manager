@@ -74,7 +74,7 @@ export default {
       newsItem: {
         newsType: "",
         newsContent: "",
-        issueTime: ""
+        newsTime: ""
       }
     };
   },
@@ -100,10 +100,15 @@ export default {
         .getSeconds()
         .toString()
         .padStart(2, 0)}`;
-      this.newsItem.issueTime = date.toISOString().substr(0, 10) + time;
-      this.$store.commit("changeNews", this.newsItem);
-      this.showSuccessDialog = true;
-      this.clearContent();
+      this.newsItem.newsTime = date.toISOString().substr(0, 10) + time;
+      this.$axios
+        .post("/api/News/issueNews", this.newsItem)
+        .then(res => {
+          if (res.data == "200") {
+            this.showSuccessDialog = true;
+            this.clearContent();
+          }
+        });
     }
   },
   watch: {

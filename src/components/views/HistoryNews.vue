@@ -37,13 +37,13 @@
       <template v-slot:body="{ items }">
         <tbody>
           <tr v-for="(item,index) in items" :key="index">
-            <td>{{item.newsNum}}</td>
+            <td>{{item.newsId}}</td>
             <td>{{item.newsType}}</td>
             <td :title="item.newsContent">{{item.newsContent}}</td>
-            <td>{{item.issueTime}}</td>
+            <td>{{item.newsTime}}</td>
             <td>
               <v-btn icon @click="deleteHistoryDialog(index)">
-                <v-icon size="16px" color="#FF0000">{{item.operate}}</v-icon>
+                <v-icon size="16px" color="#FF0000">mdi-delete</v-icon>
               </v-btn>
             </td>
           </tr>
@@ -69,7 +69,7 @@ export default {
           text: "公告序号",
           align: "center",
           sortable: true,
-          value: "newsNum",
+          value: "newsId",
           width: "80px"
         },
         {
@@ -90,7 +90,7 @@ export default {
           text: "发布时间",
           align: "center",
           sortable: true,
-          value: "issueTime",
+          value: "newsTime",
           width: "100px"
         },
         {
@@ -101,35 +101,18 @@ export default {
           width: "60px"
         }
       ],
-      historyNewsItems: [
-        {
-          newsNum: "1",
-          newsType: "HR公告",
-          newsContent:
-            "2019年10月25日起社内系统的考试管理系统功能正式上线，题库、试卷、应试管理及考试结果将通过社内系统进行管理。",
-          issueTime: "2020-02-02 12:13:14",
-          operate: "mdi-delete"
-        },
-        {
-          newsNum: "1",
-          newsType: "HR公告",
-          newsContent:
-            "2019年10月25日起社内系统的考试管理系统功能正式上线，题库、试卷、应试管理及考试结果将通过社内系统进行管理。",
-          issueTime: "2020-02-02 12:13:14",
-          operate: "mdi-delete"
-        },
-        {
-          newsNum: "1",
-          newsType: "HR公告",
-          newsContent:
-            "2019年10月25日起社内系统的考试管理系统功能正式上线，题库、试卷、应试管理及考试结果将通过社内系统进行管理。",
-          issueTime: "2020-02-02 12:13:14",
-          operate: "mdi-delete"
-        }
-      ]
+      historyNewsItems: []
     };
   },
+  mounted() {
+    this.init();
+  },
   methods: {
+    init() {
+      this.$axios.get("/api/HomePage/newsInfo").then(res => {
+        this.historyNewsItems = res.data;
+      });
+    },
     /**
      * @deprecated 展示删除dialog
      * @param index 当前所选择行的index
@@ -141,9 +124,19 @@ export default {
     /**
      * @description 确认删除事件
      */
-    deleteHistory(){
-        this.historyNewsItems.splice(this.showDetailNewsIndex,1);
-        this.showDetailNewsDialog = false;
+    deleteHistory() {
+      this.$axios
+        .get("/api/News/deleteNews", {
+          params: {
+            newsId: this.historyNewsItems[this.showDetailNewsIndex].newsId
+          }
+        })
+        .then(res => {
+          if (res.data == "200") {
+            this.historyNewsItems.splice(this.showDetailNewsIndex, 1);
+            this.showDetailNewsDialog = false;
+          }
+        });
     }
   }
 };
