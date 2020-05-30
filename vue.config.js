@@ -13,6 +13,8 @@ module.exports = {
         }
       }
 
-    }
+    },
+    //用于内网穿透
+    disableHostCheck: true,
   }
 }

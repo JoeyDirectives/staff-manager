@@ -58,7 +58,7 @@
     <v-card>
       <v-card-title>
         <v-btn @click="addRole()" color="#1AB394" style="color:#fff;font-size:14px;margin-left:5px">
-          新增档案
+          新增合同
           <v-icon right>mdi-plus-circle</v-icon>
         </v-btn>
         <v-btn @click="refresh()" color="#fff" style="color:#666;font-size:14px;margin-left:5px">
