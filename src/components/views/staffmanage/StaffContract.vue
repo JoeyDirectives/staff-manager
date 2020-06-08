@@ -238,7 +238,7 @@ export default {
           staffName: "蒋轩海",
           IDNum: "51062318521478",
           contractType: "劳动合同",
-          startDate: "2000-01-14",
+          startDate: "2018-01-14",
           endDate: "2021-12-09"
         },
         {
@@ -246,7 +246,7 @@ export default {
           staffName: "周存富",
           IDNum: "51062315213648",
           contractType: "劳动合同",
-          startDate: "2008-10-16",
+          startDate: "2018-10-16",
           endDate: "2021-02-18"
         },
         {
@@ -254,7 +254,7 @@ export default {
           staffName: "林晓霖",
           IDNum: "51062315874569",
           contractType: "劳务合同",
-          startDate: "2002-02-19",
+          startDate: "2020-02-19",
           endDate: "2021-02-25"
         },
         {
@@ -262,24 +262,32 @@ export default {
           staffName: "侯弘彬",
           IDNum: "51062318954569",
           contractType: "劳动合同",
-          startDate: "2003-12-01",
-          endDate: "2031-02-21"
+          startDate: "2013-12-01",
+          endDate: "2021-02-21"
         },
         {
           staffNum: "105",
           staffName: "赵丽伟",
           IDNum: "51062318954560",
-          contractType: "三方协议",
+          contractType: "劳动合同",
           startDate: "2009-12-08",
-          endDate: "2029-02-12"
+          endDate: "2021-02-12"
         },
         {
           staffNum: "106",
-          staffName: "张三",
-          IDNum: "510623198715211245",
-          contractType: "三方协议",
+          staffName: "文祥",
+          IDNum: "51062319871521",
+          contractType: "劳动合同",
           startDate: "2019-12-08",
-          endDate: "2029-02-12"
+          endDate: "2025-02-12"
+        },
+        {
+          staffNum: "107",
+          staffName: "李四",
+          IDNum: "51062319781471",
+          contractType: "劳动合同",
+          startDate: "2019-12-08",
+          endDate: "2021-02-12"
         }
       ],
       leaveInfo: {
@@ -363,7 +371,66 @@ export default {
     /**
      * @description 刷新表格数据
      */
-    refresh() {}
+    refresh() {
+      this.contractItems = [
+        {
+          staffNum: "101",
+          staffName: "蒋轩海",
+          IDNum: "51062318521478",
+          contractType: "劳动合同",
+          startDate: "2018-01-14",
+          endDate: "2021-12-09"
+        },
+        {
+          staffNum: "102",
+          staffName: "周存富",
+          IDNum: "51062315213648",
+          contractType: "劳动合同",
+          startDate: "2018-10-16",
+          endDate: "2021-02-18"
+        },
+        {
+          staffNum: "103",
+          staffName: "林晓霖",
+          IDNum: "51062315874569",
+          contractType: "劳务合同",
+          startDate: "2020-02-19",
+          endDate: "2021-02-25"
+        },
+        {
+          staffNum: "104",
+          staffName: "侯弘彬",
+          IDNum: "51062318954569",
+          contractType: "劳动合同",
+          startDate: "2013-12-01",
+          endDate: "2021-02-21"
+        },
+        {
+          staffNum: "105",
+          staffName: "赵丽伟",
+          IDNum: "51062318954560",
+          contractType: "劳动合同",
+          startDate: "2009-12-08",
+          endDate: "2021-02-12"
+        },
+        {
+          staffNum: "106",
+          staffName: "文祥",
+          IDNum: "51062319871521",
+          contractType: "劳动合同",
+          startDate: "2019-12-08",
+          endDate: "2025-02-12"
+        },
+        {
+          staffNum: "107",
+          staffName: "李四",
+          IDNum: "51062319781471",
+          contractType: "劳动合同",
+          startDate: "2019-12-08",
+          endDate: "2021-02-12"
+        }
+      ]
+    }
   },
   watch: {
     /**

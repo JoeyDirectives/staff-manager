@@ -212,7 +212,7 @@ export default {
       showSuccessDialog: false,
       positionItems: [
         "董事长",
-        "总经理",
+        "人事部长",
         "项目经理",
         "部长",
         "项目组长",
@@ -318,14 +318,14 @@ export default {
         {
           staffNum: "101",
           staffName: "蒋轩海",
-          position: "董事长",
+          position: "人事部长",
           department: "人事部",
           IDNum: "51062318521478",
           education: "研究生",
           phoneNum: "12345678902",
           address: "四川德阳",
           nationality: "中国",
-          workEmail: "123456@136.com",
+          workEmail: "12345678902@136.com",
           politicsStatus: "党员",
           maritalStatus: "已婚"
         },
@@ -339,7 +339,7 @@ export default {
           phoneNum: "13625214568",
           address: "四川成都",
           nationality: "中国",
-          workEmail: "136252@136.com",
+          workEmail: "13625214568@136.com",
           politicsStatus: "团员",
           maritalStatus: "未婚"
         },
@@ -353,7 +353,7 @@ export default {
           phoneNum: "17785261547",
           address: "四川南充",
           nationality: "中国",
-          workEmail: "177852@136.com",
+          workEmail: "17785261547@136.com",
           politicsStatus: "党员",
           maritalStatus: "已婚"
         },
@@ -367,7 +367,7 @@ export default {
           phoneNum: "14525896324",
           address: "四川绵阳",
           nationality: "中国",
-          workEmail: "145258@136.com",
+          workEmail: "14525896324@136.com",
           politicsStatus: "党员",
           maritalStatus: "已婚"
         },
@@ -381,21 +381,35 @@ export default {
           phoneNum: "14527896324",
           address: "北京朝阳",
           nationality: "中国",
-          workEmail: "145278@136.com",
+          workEmail: "14527896324@136.com",
           politicsStatus: "党员",
           maritalStatus: "未婚"
         },
         {
           staffNum: "106",
-          staffName: "张三",
+          staffName: "文祥",
           position: "项目组长",
           department: "开发部",
-          IDNum: "510623198715211245",
+          IDNum: "51062319871521",
           education: "本科",
-          phoneNum: "1234567890",
+          phoneNum: "22378514524",
           address: "四川南充",
           nationality: "中国",
-          workEmail: "123465@136.com",
+          workEmail: "22378514524@136.com",
+          politicsStatus: "党员",
+          maritalStatus: "未婚"
+        },
+        {
+          staffNum: "107",
+          staffName: "李四",
+          position: "程序员",
+          department: "开发部",
+          IDNum: "51062319781471",
+          education: "本科",
+          phoneNum: "14785236923",
+          address: "四川广安",
+          nationality: "中国",
+          workEmail: "14785236923@136.com",
           politicsStatus: "党员",
           maritalStatus: "未婚"
         }
@@ -463,14 +477,14 @@ export default {
         {
           staffNum: "101",
           staffName: "蒋轩海",
-          position: "董事长",
+          position: "人事部长",
           department: "人事部",
           IDNum: "51062318521478",
           education: "研究生",
           phoneNum: "12345678902",
           address: "四川德阳",
           nationality: "中国",
-          workEmail: "123456@136.com",
+          workEmail: "12345678902@136.com",
           politicsStatus: "党员",
           maritalStatus: "已婚"
         },
@@ -484,7 +498,7 @@ export default {
           phoneNum: "13625214568",
           address: "四川成都",
           nationality: "中国",
-          workEmail: "136252@136.com",
+          workEmail: "13625214568@136.com",
           politicsStatus: "团员",
           maritalStatus: "未婚"
         },
@@ -498,7 +512,7 @@ export default {
           phoneNum: "17785261547",
           address: "四川南充",
           nationality: "中国",
-          workEmail: "177852@136.com",
+          workEmail: "17785261547@136.com",
           politicsStatus: "党员",
           maritalStatus: "已婚"
         },
@@ -512,7 +526,7 @@ export default {
           phoneNum: "14525896324",
           address: "四川绵阳",
           nationality: "中国",
-          workEmail: "145258@136.com",
+          workEmail: "14525896324@136.com",
           politicsStatus: "党员",
           maritalStatus: "已婚"
         },
@@ -526,25 +540,39 @@ export default {
           phoneNum: "14527896324",
           address: "北京朝阳",
           nationality: "中国",
-          workEmail: "145278@136.com",
+          workEmail: "14527896324@136.com",
           politicsStatus: "党员",
           maritalStatus: "未婚"
         },
         {
           staffNum: "106",
-          staffName: "张三",
+          staffName: "文祥",
           position: "项目组长",
           department: "开发部",
-          IDNum: "510623198715211245",
+          IDNum: "51062319871521",
           education: "本科",
-          phoneNum: "1234567890",
+          phoneNum: "22378514524",
           address: "四川南充",
           nationality: "中国",
-          workEmail: "123465@136.com",
+          workEmail: "22378514524@136.com",
+          politicsStatus: "党员",
+          maritalStatus: "未婚"
+        },
+        {
+          staffNum: "107",
+          staffName: "李四",
+          position: "程序员",
+          department: "开发部",
+          IDNum: "51062319781471",
+          education: "本科",
+          phoneNum: "14785236923",
+          address: "四川广安",
+          nationality: "中国",
+          workEmail: "14785236923@136.com",
           politicsStatus: "党员",
           maritalStatus: "未婚"
         }
-      ]
+      ];
     }
   },
   watch: {
@@ -627,6 +655,11 @@ td {
 }
 .data-table >>> td:nth-child(13) {
   border: 1px solid #aaa;
+}
+.data-table >>> td:nth-child(10) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .data-table >>> input::selection {
   background-color: rgb(9, 117, 218);

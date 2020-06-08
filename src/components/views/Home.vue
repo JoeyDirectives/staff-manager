@@ -95,7 +95,7 @@
         <router-view />
         <v-footer absolute class="font-weight-medium" style="background-color: #fff">
           <v-col class="text-center" cols="12">
-            <strong>Copyright &copy; 2020/04/18 TJ — All Rights Reserved.</strong>
+            <strong>Copyright &copy; 2020/04/25 TJ — All Rights Reserved.</strong>
           </v-col>
         </v-footer>
       </v-container>

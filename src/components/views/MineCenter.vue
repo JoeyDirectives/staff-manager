@@ -27,9 +27,9 @@
               <v-img src="@/assets/avatar.jpg" />
             </v-avatar>
             <div style="margin-left:60px;width:100%;font-weight:600;color:#fff">
-              <v-icon color="#fff" style="margin-right:8px">mdi-notebook-multiple</v-icon>部门：开发部
+              <v-icon color="#fff" style="margin-right:8px">mdi-notebook-multiple</v-icon>部门：人事部
               <div style="height:2px;width:100%;border:1px solid #fff;margin:8px 0 8px 0"></div>
-              <v-icon color="#fff" style="margin-right:8px">mdi-account-tie</v-icon>职位：董事长
+              <v-icon color="#fff" style="margin-right:8px">mdi-account-tie</v-icon>职位：人事部长
               <div style="height:2px;width:100%;border:1px solid #fff;margin:8px 0 8px 0"></div>
               <v-icon color="#fff" style="margin-right:8px">mdi-clipboard-account-outline</v-icon>入职日期：2005/02/09
               <div style="height:2px;width:100%;border:1px solid #fff;margin:8px 0 8px 0"></div>
@@ -43,7 +43,7 @@
                 <div style="display:inline-block">工号：101</div>
                 <br />
                 <br />
-                <div style="margin-left:250px;width:480px;display:inline-block">职位：董事长</div>
+                <div style="margin-left:250px;width:480px;display:inline-block">职位：人事部长</div>
                 <div style="display:inline-block">部门：开发部</div>
                 <br />
                 <br />
